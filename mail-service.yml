@@ -1,0 +1,32 @@
+spring:
+  mail:
+    properties:
+      mail:
+        smtp:
+          connection-timeout: 5000
+          timeout: 3000
+          write-timeout: 5000
+    debug: true
+    default-encoding: UTF-8
+
+    host: smtp.mail.ru
+    password: 5qLimVtwQ6XRen5habnS
+    port: 465
+    protocol: smtps
+    smtp:
+      auth: true
+      starttls:
+        enable: true
+    username: no-reply@mugalim.academy
+
+  kafka:
+    bootstrap-servers: 172.31.40.109:9093
+    consumer:
+      group-id: 1
+server:
+  servlet:
+    context-path: /mail
+
+firebase:
+  config:
+    path: /config/orta-firebase.json

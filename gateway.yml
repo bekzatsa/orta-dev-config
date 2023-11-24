@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: ${CORS_URL}
+            allowedHeaders: "*"
+            allowedMethods: "*"
+            allowCredentials: true
+      routes:
+        - id: main_service
+          uri: lb://MAIN-SERVICE/
+          predicates:
+            - Path=/app/**
+
+        - id: file_service
+          uri: lb://FILE-SERVICE/
+          predicates:
+            - Path=/attachments/**
+
+        - id: mail_service
+          uri: lb://MAIL-SERVICE/
+          predicates:
+            - Path=/mail/**
+
+      discovery:
+        locator:
+          enabled: true
+
+server:
+  port: 4000

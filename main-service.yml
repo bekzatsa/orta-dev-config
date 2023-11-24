@@ -1,0 +1,74 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_SERVER}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  sql:
+    init:
+      platform: postgres
+#
+#  kafka:
+#    bootstrap-servers: 172.31.40.109:9093
+#    consumer:
+#      group-id: 1
+
+server:
+  servlet:
+    context-path: /app
+
+feign:
+  hystrix:
+    enabled: true
+
+kz:
+  innlab:
+    mainservice:
+      jwt:
+        access-token:
+          validity: 1440 # in min
+        refresh-token:
+          validity: 60 # in day
+        secret-key: 093617ebfa4b9af9700db274ac204ffa34195494d97b9c26c23ad561de817926
+
+      open-api:
+        api-version: 1.0.0
+        contact:
+          email: bekzat.saylaubay@gmail.com
+          name: Bekzat Sailaubayev
+          url: https://www.linkedin.com/in/bekzat-sk
+        description: Kotlin Backend application using Spring-security to implement JWT based Authentication and Authorization
+        security:
+          bearer-format: JWT
+          name: AuthenticationBearer
+          scheme: bearer
+        title: Main-service
+
+security:
+  authentication:
+    two-fa:
+      enabled: false
+      duration: 300 # seconds
+      failed-count: 3
+    registration:
+      duration: 1800 #  seconds -> 30min
+      failed-count: 5
+    reset-password:
+      duration: 1800 #  seconds -> 30min
+      failed-count: 5
+      url: es-edu.com/pages/reset-password
+    authorization:
+      failed-count: 5
+      block-time: 5 # minutes
+
+stream:
+  url:
+    audio: http://localhost:4000/attachments/audio
+    video: http://localhost:4000/attachments/video
+    image: http://localhost:4000/attachments/image
+

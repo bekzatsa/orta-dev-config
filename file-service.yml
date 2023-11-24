@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_SERVER}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  sql:
+    init:
+      platform: postgres
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+      location: ${FILE_PATH}
+
+server:
+  servlet:
+    context-path: /attachments
+
+feign:
+  hystrix:
+    enabled: true
