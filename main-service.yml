@@ -12,11 +12,11 @@ spring:
   sql:
     init:
       platform: postgres
-#
-#  kafka:
-#    bootstrap-servers: 172.31.40.109:9093
-#    consumer:
-#      group-id: 1
+
+  kafka:
+    bootstrap-servers: 172.31.40.109:9093
+    consumer:
+      group-id: 1
 
 server:
   servlet:
