@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_SERVER}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  sql:
+    init:
+      platform: postgres
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: 1
+
+server:
+  servlet:
+    context-path: /chats
+
+feign:
+  hystrix:
+    enabled: true
+
+security:
+  oauth2:
+    client:
+      client-id: chat-service
+      client-secret: ${CHAT_SERVICE_PASSWORD}
+      access-token-uri: http://localhost:5001/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://localhost:5001/uaa/users/current
+      token-info-uri: http://localhost:5001/uaa/oauth/check_token
